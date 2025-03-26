@@ -1,19 +1,19 @@
 # Prior probability of Difficulty
 D,,
-Easy,0.6
-Hard,0.4
+Easy,0.57
+Hard,0.43
 ,,
 
 # Prior probability of Intelligence
 I,,
-Low,0.7
-High,0.3
+Low,0.66
+High,0.34
 ,,
 
 # Prior probability of Effort
 E,,
-Low,0.5
-High,0.5
+Low,0.47
+High,0.53
 ,,
 
 # Prior probability of Attendance
@@ -22,7 +22,7 @@ Low,0.4
 High,0.6
 ,,
 
-# Probability of Midterm Score given Intelligence and Effort
+# Probability of Midterm Score given Intelligence and Effort (Fully Defined)
 I,E,M
 Low,Low,Low,0.75
 Low,Low,High,0.25
@@ -34,7 +34,7 @@ High,High,Low,0.15
 High,High,High,0.85
 ,,
 
-# Probability of Study Hours given Effort and Difficulty
+# Probability of Study Hours given Effort and Difficulty (Fully Defined)
 E,D,S
 Low,Easy,Low,0.64
 Low,Easy,High,0.36
@@ -46,19 +46,19 @@ High,Hard,Low,0.56
 High,Hard,High,0.44
 ,,
 
-# Probability of Final Exam Score given Midterm Score and Study Hours
+# Probability of Final Exam Score given Midterm Score and Study Hours (Fully Defined)
 M,S,F
 Low,Low,Low,0.83
 Low,Low,High,0.17
 Low,High,Low,0.61
 Low,High,High,0.39
 High,Low,Low,0.31
-High,Low,High,0.71
+High,Low,High,0.69
 High,High,Low,0.21
 High,High,High,0.79
 ,,
 
-# Probability of Grade given Midterm Score, Final Exam Score, and Attendance
+# Probability of Grade given Midterm Score, Final Exam Score, and Attendance (Fully Defined)
 M,F,A,G
 Low,Low,Low,Fail,0.95
 Low,Low,Low,Pass,0.05

@@ -171,79 +171,55 @@ def recurse_calc_query_exact_tree(model, queryVar, evidence, variableValues, rem
     Note: You MAY change this structure during the recursion, but make sure undo those changes when you're done with them
   remainingCalc: list of (boolean,string), see XXX and comments in calc_query_exact_tree() for format
   """
-  if not remainingCalc:  # Base case: no more terms to process
-        pr = calc_global_joint_prob(model, variableValues)
-        return pr, pr
+  # Base case: if no terms remain, return 1 (base probability)
+  if not remainingCalc:
+     return 1, 1
 
-  marginalize, var = remainingCalc[0]  # Grab details for the next term
-  if DEBUG_OUTPUT > 0:
-        print(f"Processing {var} with marginalize={marginalize} and remainingCalc={remainingCalc}")
+  # Get the next term to process
+  marginalize, var = remainingCalc[0]
 
   if marginalize:
-        # Summation term: Marginalize over all possible values
+        # Summation term (branching over True/False)
         prQ_T, prQ_F = 0, 0
         for val in [True, False]:
             variableValues[var] = val
-            sub_pr_T, sub_pr_F = recurse_calc_query_exact_tree(
+            branch_prQ_T, branch_prQ_F = recurse_calc_query_exact_tree(
                 model, queryVar, evidence, variableValues, remainingCalc[1:]
             )
-            prQ_T += sub_pr_T
-            prQ_F += sub_pr_F
-        variableValues[var] = None  # Reset variable value after recursion
+            prQ_T += branch_prQ_T
+            prQ_F += branch_prQ_F
+            # Revert change to variableValues after recursion
+            variableValues[var] = None
+  elif var == queryVar:
+        # Probability term for query variable (compute for True and False)
+        variableValues[var] = True
+        prQ_T, _ = recurse_calc_query_exact_tree(model, queryVar, evidence, variableValues, remainingCalc[1:])
+        variableValues[var] = False
+        _, prQ_F = recurse_calc_query_exact_tree(model, queryVar, evidence, variableValues, remainingCalc[1:])
+        variableValues[var] = None
   else:
-        # Probability term: Process conditional probability for the variable
-        prQ_T, prQ_F = 1, 1
-        if queryVar in model.varDist[var].parents:
-            # Query variable appears as a parent (condition) for this term
-            for val in [True, False]:
-                variableValues[queryVar] = val
-                pr_entry = read_cpt(model, var, variableValues) if val else (1 - read_cpt(model, var, variableValues))
-                recurse_pr_T, recurse_pr_F = recurse_calc_query_exact_tree(
-                    model, queryVar, evidence, variableValues, remainingCalc[1:]
-                )
-                if val:
-                    prQ_T *= pr_entry * recurse_pr_T
-                    prQ_F *= pr_entry * recurse_pr_F
-                else:
-                    prQ_T *= (1 - pr_entry) * recurse_pr_T
-                    prQ_F *= (1 - pr_entry) * recurse_pr_F
-            variableValues[queryVar] = None  # Reset query variable value
-        elif var == queryVar:
-            # Processing term for query variable itself
-            for val in [True, False]:
-                variableValues[var] = val
-                pr_entry = read_cpt(model, var, variableValues) if val else (1 - read_cpt(model, var, variableValues))
-                recurse_pr_T, recurse_pr_F = recurse_calc_query_exact_tree(
-                    model, queryVar, evidence, variableValues, remainingCalc[1:]
-                )
-                if val:
-                    prQ_T *= pr_entry * recurse_pr_T
-                    prQ_F *= pr_entry * recurse_pr_F
-                else:
-                    prQ_T *= (1 - pr_entry) * recurse_pr_T
-                    prQ_F *= (1 - pr_entry) * recurse_pr_F
-            variableValues[var] = None  # Reset after processing
-        else:
-            # Simple term: No query variable involved
-            for val in [True, False]:
-                variableValues[var] = val
-                pr_entry = read_cpt(model, var, variableValues) if val else (1 - read_cpt(model, var, variableValues))
-                recurse_pr_T, recurse_pr_F = recurse_calc_query_exact_tree(
-                    model, queryVar, evidence, variableValues, remainingCalc[1:]
-                )
-                prQ_T *= pr_entry * recurse_pr_T
-                prQ_F *= pr_entry * recurse_pr_F
-            variableValues[var] = None  # Reset after processing
+        # Simple probability term (no query involvement)
+        prQ_T, prQ_F = 0, 0
+        for val in [True, False]:
+            variableValues[var] = val
+            # Skip if any parent value is missing (to prevent read_cpt errors)
+            if any(variableValues[parent] is None for parent in model.varDist[var].parents):
+                variableValues[var] = None
+                continue
 
-  # Recurse if more terms are left
-  if len(remainingCalc) > 1:
-        recurse_prQ_T, recurse_prQ_F = recurse_calc_query_exact_tree(
-            model, queryVar, evidence, variableValues, remainingCalc[1:]
-        )
-        prQ_T *= recurse_prQ_T
-        prQ_F *= recurse_prQ_F
+            # Read conditional probability if parent values are complete
+            prob = read_cpt(model, var, variableValues) if val else (1 - read_cpt(model, var, variableValues))
+            branch_prQ_T, branch_prQ_F = recurse_calc_query_exact_tree(
+                model, queryVar, evidence, variableValues, remainingCalc[1:]
+            )
 
-  return prQ_T, prQ_F  # Return (relative) probabilities for True and False  
+            # Multiply the current term's probability with the branch result
+            prQ_T += prob * branch_prQ_T
+            prQ_F += prob * branch_prQ_F
+            # Revert changes after recursion
+            variableValues[var] = None
+
+  return prQ_T, prQ_F
 ##############################################################################
 ## Support code
 def read_cpt(model,varName,condVals):

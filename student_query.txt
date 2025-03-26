@@ -1,0 +1,54 @@
+Query: Grade (G) = Pass
+Evidence: 
+  - Attendance (A) = True
+  - Final Exam Score (F) = True
+  - Study Hours (S) = True
+Hidden Variables: 
+  - Midterm Score (M)
+  - Effort (E)
+  - Intelligence (I)
+Result:
+Probability of Grade = Fail (G = False) given evidence is approximately 0.52885
+
+Exact Output:
+Reading model from student_bn.csv
+Reading table for variable 'D'...
+Reading table for variable 'I'...
+Reading table for variable 'E'...
+Reading table for variable 'A'...
+Reading table for variable 'M'...
+Reading table for variable 'S'...
+Reading table for variable 'F'...
+Reading table for variable 'G'...
+Inference mode: brute
+Query: 'G' is False
+Evidence:
+  'A' is True
+Probability is 0.5288537300959999
+
+Query: Final Exam Score (F) = True
+Evidence: 
+  - Midterm Score (M) = True
+  - Difficulty (D) = False
+  - Effort (E) = True
+Hidden Variables: 
+  - Study Hours (S)
+  - Grade (G)
+Result:
+Probability of Final Exam Score = True (F = True) given evidence is approximately 0.73562
+
+Exact Output:
+Reading model from student_bn.csv
+Reading table for variable 'D'...
+Reading table for variable 'I'...
+Reading table for variable 'E'...
+Reading table for variable 'A'...
+Reading table for variable 'M'...
+Reading table for variable 'S'...
+Reading table for variable 'F'...
+Reading table for variable 'G'...
+Inference mode: brute
+Query: 'F' is True
+Evidence:
+  'M' is True
+Probability is 0.7356202483739838

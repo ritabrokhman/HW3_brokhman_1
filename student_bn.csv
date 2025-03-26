@@ -1,0 +1,42 @@
+# Conditional Probability Table for Delay
+# Format: Weather, Traffic, Time_of_day, Delay
+Weather, Traffic, Time_of_day, Delay
+Rainy, Heavy, Morning, 0.9
+Rainy, Heavy, Afternoon, 0.8
+Rainy, Heavy, Evening, 0.85
+Sunny, Light, Morning, 0.1
+Sunny, Light, Afternoon, 0.2
+Sunny, Light, Evening, 0.3
+
+# Conditional Probability Table for Mood
+# Format: Delay, Outfit, Mood
+Delay, Outfit, Mood
+Yes, Casual, Bad
+No, Casual, Good
+Yes, Formal, Good
+No, Formal, Bad
+
+# Conditional Probability Table for Outfit
+# Format: Weather, Location, Outfit
+Weather, Location, Outfit
+Rainy, Home, Casual
+Rainy, Work, Casual
+Rainy, School, Formal
+Sunny, Home, Casual
+Sunny, Work, Formal
+Sunny, School, Casual
+
+# Conditional Probability Table for Mode_of_transport
+# Format: Location, Mode_of_transport
+Location, Mode_of_transport
+Home, Car
+Home, Bike
+Work, Car
+School, Walk
+
+# Conditional Probability Table for Location
+# Format: Location, P(Location)
+Location, P(Location)
+Home, 0.3
+Work, 0.4
+School, 0.3

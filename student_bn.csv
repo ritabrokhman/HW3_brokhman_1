@@ -18,8 +18,8 @@ High,0.53
 
 # Prior probability of Attendance
 A,,
-Low,0.4
-High,0.6
+Low,0.40
+High,0.60
 ,,
 
 # Probability of Midterm Score given Intelligence and Effort (Fully Defined)

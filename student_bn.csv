@@ -28,52 +28,52 @@ Low,Low,Low,0.75
 Low,Low,High,0.25
 Low,High,Low,0.55
 Low,High,High,0.45
-High,Low,Low,0.40
-High,Low,High,0.60
-High,High,Low,0.20
-High,High,High,0.80
+High,Low,Low,0.35
+High,Low,High,0.65
+High,High,Low,0.15
+High,High,High,0.85
 ,,
 
-# Probability of Study Hours given Effort and Difficulty (Fully Defined)
+# Probability of Study Hours given Effort and Difficulty
 E,D,S
-Low,Easy,Low,0.65
-Low,Easy,High,0.35
-Low,Hard,Low,0.80
-Low,Hard,High,0.20
-High,Easy,Low,0.30
-High,Easy,High,0.70
-High,Hard,Low,0.50
-High,Hard,High,0.50
+Low,Easy,Low,0.64
+Low,Easy,High,0.36
+Low,Hard,Low,0.81
+Low,Hard,High,0.19
+High,Easy,Low,0.26
+High,Easy,High,0.74
+High,Hard,Low,0.56
+High,Hard,High,0.44
 ,,
 
-# Probability of Final Exam Score given Midterm Score and Study Hours (Fully Defined)
+# Probability of Final Exam Score given Midterm Score and Study Hours
 M,S,F
-Low,Low,Low,0.85
-Low,Low,High,0.15
-Low,High,Low,0.60
-Low,High,High,0.40
-High,Low,Low,0.40
-High,Low,High,0.60
-High,High,Low,0.20
-High,High,High,0.80
+Low,Low,Low,0.83
+Low,Low,High,0.17
+Low,High,Low,0.61
+Low,High,High,0.39
+High,Low,Low,0.31
+High,Low,High,0.71
+High,High,Low,0.21
+High,High,High,0.79
 ,,
 
-# Probability of Grade given Midterm Score, Final Exam Score, and Attendance (Fully Defined)
+# Probability of Grade given Midterm Score, Final Exam Score, and Attendance
 M,F,A,G
 Low,Low,Low,Fail,0.95
 Low,Low,Low,Pass,0.05
-Low,Low,High,Fail,0.80
-Low,Low,High,Pass,0.20
-Low,High,Low,Fail,0.75
-Low,High,Low,Pass,0.25
-Low,High,High,Fail,0.50
-Low,High,High,Pass,0.50
-High,Low,Low,Fail,0.60
-High,Low,Low,Pass,0.40
-High,Low,High,Fail,0.40
-High,Low,High,Pass,0.60
-High,High,Low,Fail,0.20
-High,High,Low,Pass,0.80
-High,High,High,Fail,0.05
-High,High,High,Pass,0.95
+Low,Low,High,Fail,0.84
+Low,Low,High,Pass,0.16
+Low,High,Low,Fail,0.72
+Low,High,Low,Pass,0.28
+Low,High,High,Fail,0.54
+Low,High,High,Pass,0.46
+High,Low,Low,Fail,0.62
+High,Low,Low,Pass,0.38
+High,Low,High,Fail,0.42
+High,Low,High,Pass,0.58
+High,High,Low,Fail,0.22
+High,High,Low,Pass,0.78
+High,High,High,Fail,0.08
+High,High,High,Pass,0.92
 ,,

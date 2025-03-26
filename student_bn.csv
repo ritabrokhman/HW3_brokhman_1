@@ -1,42 +1,79 @@
-# Conditional Probability Table for Delay
-# Format: Weather, Traffic, Time_of_day, Delay
-Weather, Traffic, Time_of_day, Delay
-Rainy, Heavy, Morning, 0.9
-Rainy, Heavy, Afternoon, 0.8
-Rainy, Heavy, Evening, 0.85
-Sunny, Light, Morning, 0.1
-Sunny, Light, Afternoon, 0.2
-Sunny, Light, Evening, 0.3
+# Prior probability of Difficulty
+D,,
+Easy,0.6
+Hard,0.4
+,,
 
-# Conditional Probability Table for Mood
-# Format: Delay, Outfit, Mood
-Delay, Outfit, Mood
-Yes, Casual, Bad
-No, Casual, Good
-Yes, Formal, Good
-No, Formal, Bad
+# Prior probability of Intelligence
+I,,
+Low,0.7
+High,0.3
+,,
 
-# Conditional Probability Table for Outfit
-# Format: Weather, Location, Outfit
-Weather, Location, Outfit
-Rainy, Home, Casual
-Rainy, Work, Casual
-Rainy, School, Formal
-Sunny, Home, Casual
-Sunny, Work, Formal
-Sunny, School, Casual
+# Prior probability of Effort
+E,,
+Low,0.5
+High,0.5
+,,
 
-# Conditional Probability Table for Mode_of_transport
-# Format: Location, Mode_of_transport
-Location, Mode_of_transport
-Home, Car
-Home, Bike
-Work, Car
-School, Walk
+# Prior probability of Attendance
+A,,
+Low,0.4
+High,0.6
+,,
 
-# Conditional Probability Table for Location
-# Format: Location, P(Location)
-Location, P(Location)
-Home, 0.3
-Work, 0.4
-School, 0.3
+# Probability of Midterm Score given Intelligence and Effort
+I,E,M
+Low,Low,Low,0.75
+Low,Low,High,0.25
+Low,High,Low,0.55
+Low,High,High,0.45
+High,Low,Low,0.40
+High,Low,High,0.60
+High,High,Low,0.20
+High,High,High,0.80
+,,
+
+# Probability of Study Hours given Effort and Difficulty (Fully Defined)
+E,D,S
+Low,Easy,Low,0.65
+Low,Easy,High,0.35
+Low,Hard,Low,0.80
+Low,Hard,High,0.20
+High,Easy,Low,0.30
+High,Easy,High,0.70
+High,Hard,Low,0.50
+High,Hard,High,0.50
+,,
+
+# Probability of Final Exam Score given Midterm Score and Study Hours (Fully Defined)
+M,S,F
+Low,Low,Low,0.85
+Low,Low,High,0.15
+Low,High,Low,0.60
+Low,High,High,0.40
+High,Low,Low,0.40
+High,Low,High,0.60
+High,High,Low,0.20
+High,High,High,0.80
+,,
+
+# Probability of Grade given Midterm Score, Final Exam Score, and Attendance (Fully Defined)
+M,F,A,G
+Low,Low,Low,Fail,0.95
+Low,Low,Low,Pass,0.05
+Low,Low,High,Fail,0.80
+Low,Low,High,Pass,0.20
+Low,High,Low,Fail,0.75
+Low,High,Low,Pass,0.25
+Low,High,High,Fail,0.50
+Low,High,High,Pass,0.50
+High,Low,Low,Fail,0.60
+High,Low,Low,Pass,0.40
+High,Low,High,Fail,0.40
+High,Low,High,Pass,0.60
+High,High,Low,Fail,0.20
+High,High,Low,Pass,0.80
+High,High,High,Fail,0.05
+High,High,High,Pass,0.95
+,,
